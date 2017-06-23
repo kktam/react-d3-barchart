@@ -12,7 +12,7 @@ class BarChart extends Component {
     this.createBarChart = this.createBarChart.bind(this)
     this.onHover = this.onHover.bind(this)      
     this.onClick = this.onClick.bind(this)    
-    this.state = { hover: "none", click: "none" }  
+    this.state = { hover: "none", click: "none", hasLegend: false }  
   }
 
   componentDidMount() {
@@ -41,9 +41,13 @@ class BarChart extends Component {
     const node = this.node
     const dataMax = max(this.props.data, function (d) { return d.data; })
     const legendWidth = 100
-    const barWidth = (this.props.size.width - legendWidth - 5) / this.props.data.length
 
-    if (this.props.legend != null) {
+    let barWidth = 10
+    if (this.props.size != 'undefined') {
+      barWidth = (this.props.size.width - legendWidth - 5) / this.props.data.length
+    }
+
+    if (this.props.legend != 'undefined' && this.props.legend != null) {
       const legend = legendColor()
         .scale(this.props.legend.colorScale)
         .labels(this.props.legend.label)
@@ -59,6 +63,8 @@ class BarChart extends Component {
       select(node)
         .select("g.legend")
           .attr("transform", "translate(" + (this.props.size.width - legendWidth) + ", 20)")
+
+      this.setState({ asLegend : true })
     }
 
     const yScale = scaleLinear()
@@ -87,7 +93,7 @@ class BarChart extends Component {
         .attr("y", d => this.props.size.height - yScale(d.data))
         .attr("height", d => yScale(d.data))
         .attr("width", barWidth)
-        .style("fill", (d,i) => this.state.hover === d.id ? "#FCBC34" : this.props.legend.colorScale(d.colorMeasure))
+        .style("fill", (d,i) => this.state.hover === d.id ? "#FCBC34" : (this.state.hasLegend) ? 'black' : this.props.legend.colorScale(d.colorMeasure) )
         .style("stroke", "black")
         .style("stroke-opacity", 0.25)
 
@@ -113,7 +119,13 @@ BarChart.propTypes = {
   legend: PropTypes.shape({
     colorScale: PropTypes.func,
     label: PropTypes.arrayOf(PropTypes.string)
-  })
+  }),
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    data: PropTypes.number.isRequired,
+    colorMeasure: PropTypes.number.isRequired,
+    created_at: PropTypes.instanceOf(Date)
+  }))
 };
 
 export default BarChart
