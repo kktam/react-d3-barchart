@@ -31,7 +31,7 @@ describe('Barchart', () => {
 
 
   it('bar chart height test', () => {
-    const data = [{id: 1, data:1, colorMeasure: 1}, {id: 2, data:2, colorMeasure: 2}];
+    const data = [{id: "1", data:1, colorMeasure: 1}, {id: "2", data:2, colorMeasure: 2}];
 
     render(<BarChart 
             data={data} 

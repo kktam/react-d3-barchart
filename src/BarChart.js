@@ -64,7 +64,7 @@ class BarChart extends Component {
         .select("g.legend")
           .attr("transform", "translate(" + (this.props.size.width - legendWidth) + ", 20)")
 
-      this.setState({ asLegend : true })
+      this.setState({ hasLegend : true })
     }
 
     const yScale = scaleLinear()
@@ -93,7 +93,7 @@ class BarChart extends Component {
         .attr("y", d => this.props.size.height - yScale(d.data))
         .attr("height", d => yScale(d.data))
         .attr("width", barWidth)
-        .style("fill", (d,i) => this.state.hover === d.id ? "#FCBC34" : (this.state.hasLegend) ? 'black' : this.props.legend.colorScale(d.colorMeasure) )
+        .style("fill", (d,i) => this.state.hover === d.id ? "#FCBC34" : (this.state.hasLegend) ? this.props.legend.colorScale(d.colorMeasure) : 'black' )
         .style("stroke", "black")
         .style("stroke-opacity", 0.25)
 
