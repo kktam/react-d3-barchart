@@ -21,12 +21,12 @@ Release 1.0
 - simplified passing of hover data, as compared to the Manning solution.
 - working on repackaging palette legend later for more options.
 
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
+[build-badge]: https://api.travis-ci.org/kktam/react-d3-barchart.svg?branch=master
 [build]: https://travis-ci.org/kktam/react-d3-barchart.svg?branch=master
 
 [npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
 [npm]: https://www.npmjs.org/package/npm-package
 
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
+[coveralls-badge]: https://img.shields.io/coveralls/kktam/repo/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/kktam/react-d3-barchart?branch=master
 
