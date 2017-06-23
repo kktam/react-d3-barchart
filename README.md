@@ -27,6 +27,6 @@ Release 1.0
 [npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
 [npm]: https://www.npmjs.org/package/npm-package
 
-[coveralls-badge]: https://img.shields.io/coveralls/kktam/repo/master.png?style=flat-square
+[coveralls-badge]: https://coveralls.io/repos/github/kktam/react-d3-barchart/badge.svg?branch=master
 [coveralls]: https://coveralls.io/github/kktam/react-d3-barchart?branch=master
 
