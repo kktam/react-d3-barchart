@@ -86,6 +86,31 @@ describe('Barchart', () => {
     })
   })     
 
+  it('should draw the correct bar width', () => {
+    const data = [{id: "1", data:3, colorMeasure: 3}
+        , {id: "2", data:7, colorMeasure: 7}
+        , {id: "3", data:9, colorMeasure: 9}];
+
+    const width = 500;
+    const height = 500;
+
+    render(<BarChart 
+            data={data} 
+            size={{ width: width , height: height }} 
+            />, 
+      node, () => {
+        let widthInPixels = round(((width - 105) / 3), 3);
+        let firstBarActualWidth = round(getBarWidth(node, 0), 3);
+        expect(firstBarActualWidth).toBe(widthInPixels); 
+
+        let secondBarActualWidth = round(getBarWidth(node, 1), 3);
+        expect(secondBarActualWidth).toBe(widthInPixels);  
+
+        let thirdBarActualWidth = round(getBarWidth(node, 2), 3);
+        expect(thirdBarActualWidth).toBe(widthInPixels);                   
+    })
+  })
+
   function getSvg(node) {
     return select(node);
   }  
@@ -110,7 +135,16 @@ describe('Barchart', () => {
     //console.log(a["height"].baseVal.value);    
     //console.log(typeof(a["height"].baseVal.value));    
     return a["height"].baseVal.value;
-  }     
+  } 
+
+  function getBarWidth(node, idx) {
+    let a = getSvg(node).selectAll("rect.bar")._groups[0][idx];
+    //console.log(a);
+    //console.log(a["width"]);
+    //console.log(a["width"].baseVal.value);    
+    //console.log(typeof(a["width"].baseVal.value));    
+    return a["width"].baseVal.value;
+  }        
 
   function round(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
